@@ -3,16 +3,14 @@
 data = ('Alice', 25, 'Engineer')
 # Task: Unpack the tuple into three variables and print:
 # "Alice is a 25-year-old Engineer"
-name, age, profession = data
-print(f"{name} is a {age}-year-old {profession}")
+name, age, career = data
+print(f"{name} is a {age}-year-old {career}")
 # Output: Alice is a 25-year-old Engineer
 #---------------------------------------------------------------
 nums = (10, 20, 30, 40, 50)
 # Task: Print the first two and last two elements using slicing
-first_two = nums[:2]
-last_two = nums [:-2]
-print(f"First two: {first_two}\n")
-print(f"Last two: {last_two}")
+first_two = data[:2]
+last_two = data[-2]
 # Output:
 # First two elements: (10, 20)
 # Last two elements: (40, 50)
@@ -23,7 +21,7 @@ t = (1, 2, 3)
 # t[1] = 99 <-- this would be an error since tuples are immutable.
 #Creating a new tuple is the best choice.
 t = (t[0],99,t[2])
-print(f"Updated Tuple: {t}")
+print(f"Updated tuple: {t}")
 # Output: Updated tuple: (1, 99, 3)
 #---------------------------------------------------------------
 ################################################################
