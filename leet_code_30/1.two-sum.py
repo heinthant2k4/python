@@ -7,14 +7,12 @@
 # @lc code=start
 class Solution:
     def twoSum(self, nums: List[int], target: int) -> List[int]:
-        #[2,7,11,15] -> [2,7|.11.15]
-        #hashmap
         prevMap = {}
         for i, num in enumerate(nums):
-            diff = target - num # x = 9 - 2 = 7-> 7 in prevMap.
-            if diff in prevMap:
-                return [prevMap[diff], i]
-            prevMap[num] = i #{} -> 2:0 -> 7:1->11:2
+            complement = target - num
+            if complement in prevMap:
+                return [prevMap[complement],i]
+            prevMap[num] = i
         return []
         
 # @lc code=end

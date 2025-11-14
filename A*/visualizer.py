@@ -121,7 +121,99 @@ def a_star_algorithm(draw,grid,start,end):
   count = 0
   open_set = PriorityQueue()
   open_set.put((0,count,start))
-  came_from = {}
+  # Bidirectional A* (practical speedup on grids). Replace single-source A* with two simultaneous A* searches
+  # from start and end; when they meet we reconstruct the path.
+  came_from = {}  # keep for compatibility if something else expects it, but we will use came_from_f / came_from_b
+  came_from_f = {}
+  came_from_b = {}
+  count_f = 0
+  count_b = 0
+  open_f = PriorityQueue()
+  open_b = PriorityQueue()
+  open_f.put((0, count_f, start))
+  open_b.put((0, count_b, end))
+
+  g_f = {node: float("inf") for row in grid for node in row}
+  g_b = {node: float("inf") for row in grid for node in row}
+  g_f[start] = 0
+  g_b[end] = 0
+
+  f_f = {node: float("inf") for row in grid for node in row}
+  f_b = {node: float("inf") for row in grid for node in row}
+  f_f[start] = h(start.get_pos(), end.get_pos())
+  f_b[end] = h(end.get_pos(), start.get_pos())
+
+  open_f_hash = {start}
+  open_b_hash = {end}
+  closed_f = set()
+  closed_b = set()
+
+  def build_bidirectional_path(meet):
+    # walk back from meet to start (forward came_from)
+    reconstruct_path(came_from_f, meet, draw)
+    # walk from meet to end (backward came_from)
+    reconstruct_path(came_from_b, meet, draw)
+
+  # Expand the side with smaller current f-value each step.
+  while not open_f.empty() and not open_b.empty():
+    # peek at fronts
+    front_f = open_f.queue[0][0] if open_f.queue else float("inf")
+    front_b = open_b.queue[0][0] if open_b.queue else float("inf")
+    if front_f <= front_b:
+      current = open_f.get()[2]
+      open_f_hash.remove(current)
+      closed_f.add(current)
+
+      if current in closed_b:
+        build_bidirectional_path(current)
+        start.make_start()
+        end.make_end()
+        return True
+
+      for neighbor in current.neighbors:
+        if neighbor in closed_f:
+          continue
+        tentative_g = g_f[current] + 1
+        if tentative_g < g_f[neighbor]:
+          came_from_f[neighbor] = current
+          g_f[neighbor] = tentative_g
+          f_f[neighbor] = tentative_g + h(neighbor.get_pos(), end.get_pos())
+          if neighbor not in open_f_hash:
+            count_f += 1
+            open_f.put((f_f[neighbor], count_f, neighbor))
+            open_f_hash.add(neighbor)
+            neighbor.make_open()
+      draw()
+      if current != start:
+        current.make_closed()
+    else:
+      current = open_b.get()[2]
+      open_b_hash.remove(current)
+      closed_b.add(current)
+
+      if current in closed_f:
+        build_bidirectional_path(current)
+        start.make_start()
+        end.make_end()
+        return True
+
+      for neighbor in current.neighbors:
+        if neighbor in closed_b:
+          continue
+        tentative_g = g_b[current] + 1
+        if tentative_g < g_b[neighbor]:
+          came_from_b[neighbor] = current
+          g_b[neighbor] = tentative_g
+          f_b[neighbor] = tentative_g + h(neighbor.get_pos(), start.get_pos())
+          if neighbor not in open_b_hash:
+            count_b += 1
+            open_b.put((f_b[neighbor], count_b, neighbor))
+            open_b_hash.add(neighbor)
+            neighbor.make_open()
+      draw()
+      if current != end:
+        current.make_closed()
+  return False
   g_score = {node: float("inf") for row in grid for node in row}
   g_score[start] = 0
   f_score = {node: float("inf") for row in grid for node in row}

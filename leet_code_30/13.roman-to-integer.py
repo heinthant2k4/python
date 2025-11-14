@@ -18,12 +18,12 @@ class Solution:
             'M': 1000
         }
         result = 0
-        for a,b in zip(s,s[1:]):#first iterate through s and second iterate through s from index 1
+        for a, b in zip(s,s[1:]):
             if romans[a] < romans[b]:
                 result -= romans[a]
             else:
                 result += romans[a]
-        result += romans[s[-1]] #add the last character value
+        result += romans[s[-1]]
         return result
 # @lc code=end
 
