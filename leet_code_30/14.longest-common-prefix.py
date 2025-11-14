@@ -20,6 +20,21 @@ class Solution:
                 if not prefix:
                     return ""
         return prefix
+    '''
+    Tracing: input = [flowers,flour,flood]
+    if input is an empty list: it will return "".
+    we set prefix as the first string in the list,flowers. 
+    We loop through strs list starting from second one to the rest.
+    While the current string in the array doesn't start with prefix(for eg.fl), we reduce the prefix by one.
+    if prefix is empty we return none.
+    else we return the prefix.
+    [flowers,flour,flood]
+    list not empty -> proceeds
+    prefix = flowers
+    s: flour(1st iteration), flood(2nd iteration): 
+    flowers != flour -> flowers = flower
+    ->flowe->flow->flo->fl (both flour and flood starts with fl -> fl is LCP) 
+    '''
 
 # @lc code=end
 
