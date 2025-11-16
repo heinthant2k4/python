@@ -1,3 +1,7 @@
 {
-  "ros.distro": "jazzy"
+  "ros.distro": "jazzy",
+  "python.analysis.extraPaths": [
+    "./leet_code_30",
+    "./leet_code_30/two_sum_"
+  ]
 }
