@@ -8,7 +8,7 @@
 class Solution:
     def addBinary(self, a: str, b: str) -> str:
         if len(a) < len(b):
-            a, b = b, a
+            a,b = b,a
         a = a[::-1]
         b = b[::-1]
         carry = 0
