@@ -7,17 +7,17 @@
 # @lc code=start
 class Solution:
     def searchInsert(self, nums: List[int], target: int) -> int:
-        #arrays is sorted and if we want a single loop then we must use sliding window method.
-        left = 0
-        right = len(nums) - 1
-        while left <= right:
-            mid = (left + right) // 2
+        #Problem requires us to solve the problem with O(log n) complexity, we gonna use sliding window method and divide and conquer algorithm to find the target index.
+        l = 0
+        r = len(nums) - 1
+        while l <= r:
+            mid = (l+r) // 2
             if nums[mid] == target:
                 return mid
             elif nums[mid] < target:
-                left += 1
+                l += 1
             else:
-                right -= 1
-        return left
+                r -= 1
+        return l
 # @lc code=end
 

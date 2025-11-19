@@ -123,7 +123,7 @@ def a_star_algorithm(draw,grid,start,end):
   open_set.put((0,count,start))
   # Bidirectional A* (practical speedup on grids). Replace single-source A* with two simultaneous A* searches
   # from start and end; when they meet we reconstruct the path.
-  came_from = {}  # keep for compatibility if something else expects it, but we will use came_from_f / came_from_b
+  came_from = { }  # keep for compatibility if something else expects it, but we will use came_from_f / came_from_b
   came_from_f = {}
   came_from_b = {}
   count_f = 0

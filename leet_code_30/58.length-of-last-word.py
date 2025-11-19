@@ -7,10 +7,10 @@
 # @lc code=start
 class Solution:
     def lengthOfLastWord(self, s: str) -> int:
-        #This problem wants us to find the length of the last word in a string. We can do this by splitting the string by spaces and returning the length of the last element in the resulting list. 
-        words = s.split()
-        if not words:
+        #A very easy problem, solution is in the question itself, word is a maximal substring without whitespace. We just split the array of characters which is list and then return the last value
+        word = s.split()
+        if not word:
             return 0
-        return len(words[-1])
+        return len(word[-1])
 # @lc code=end
 
