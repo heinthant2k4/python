@@ -19,7 +19,7 @@ class Solution:
                 return [prevMap[diff],i]
             #we add visited node to num value as key
             prevMap[num] = i
-        return []
+        return 
 
         
 # @lc code=end
