@@ -2,7 +2,7 @@
 # A* (A-star) — Documentation
 
 ## Summary (short)
-A* is a very useful and smart BFS algorithm to search for the shortest node from start node to an end node in state-space graphs. General formula is f(n) = g(n) + h(n), g(n) is the shortest distance from start to n-node in the graph meanwhile h(n) is heruistic which is basically nothing but a smart guess from n node to the goal node(neighboring since BFS). h(n) is pretty vital when it comes to A* since A* cost and performance heavily relies on h(n)'s quality. Ideally, h(n) must be admissable which means never overestimate the distance but can be underestimate or equal to distance between n-node to goal.
+A* is a very useful and smart BFS algorithm to search for the shortest node from start node to an end node in state-space graphs. General formula is f(n) = g(n) + h(n), g(n) is the shortest distance from start to n-node in the graph meanwhile h(n) is heruistic which is basically nothing but a smart guess from n node to the goal node(neighboring since BFS). h(n) is pretty vital when it comes to A* since A* cost and performance heavily relies on h(n)'s quality. Ideally, h(n) must be admissable which means never overestimate the distance but can be underestimate or equal to distance between nth node to goal.
 
 ---
 
